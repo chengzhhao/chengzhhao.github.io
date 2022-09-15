@@ -36,9 +36,10 @@ on a.学号=b.学号<br>
 思路2：使用 limit 和 offet<br>
 limit n子句表示查询结果返回前n条数据<br>
 offset n表示跳过x条语句<br>
-limit y offset x 分句表示查询结果跳过 x 条数据，读取前 y 条数据<br>
+limit x offset y 分句表示查询结果跳过 y 条数据，读取前 x 条数据<br>
 使用limit和offset，降序排列再返回第二条记录可以得到第二大的值。<br>
-3.考虑特殊情况<br>
+注意sql语句中不支持运算<br>
+3. 考虑特殊情况<br>
 题目要求，如果没有第二高的成绩，返回空值，所以这里用判断空值的函数（ifnull）函数来处理特殊情况。<br>
 ifnull(a,b)函数解释：如果value1不是空，结果返回，如果value1是空，结果返回b<br>
 ### 【题解】
@@ -57,6 +58,17 @@ ifnull(a,b)函数解释：如果value1不是空，结果返回，如果value1是
 ### 【本题考点】
 1. 第二高的查询思路，利用本题的解决办法可以解决这类问题：查询第N高的数据
 2. limit字句的用法
-
 3. ifnull的用法
+## 【举一反三】
+ 查找 Employee 表中第二高的薪水（Salary）。查询结果返回 200 作为第二高的薪水。如果不存在第二高的薪水，那么查询应返回 null。
+ ```
+    select ifNull(
+(select distinct salary
+from Employee 
+order by Salary Desc
+limit 1,1),null
+) as SecondHighestSalary;
+
+ ```
+
 
