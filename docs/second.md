@@ -61,14 +61,15 @@ ifnull(a,b)函数解释：如果value1不是空，结果返回，如果value1是
 3. ifnull的用法
 ## 【举一反三】
  查找 Employee 表中第二高的薪水（Salary）。查询结果返回 200 作为第二高的薪水。如果不存在第二高的薪水，那么查询应返回 null。
- ```
-    select ifNull(
-(select distinct salary
-from Employee 
-order by Salary Desc
-limit 1,1),null
-) as SecondHighestSalary;
-
- ```
 
 
+ ### 【题解】
+``` mysql 
+      select ifNull(
+          (select distinct salary 
+           from Employee 
+           order by Salary Desc
+           limit 1,1),null
+           ) as SecondHighestSalary;
+
+```
